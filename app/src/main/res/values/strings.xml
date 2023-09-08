@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Semapa Qr</string>
+    <string name="SearchBusinessAssets">Buscar activo</string>
+    <string name="BusinessAssets">Activos</string>
+    <string name="title_activity_data_app">DataApp</string>
+    <string name="options_db">Opciones de la data</string>
+    <string name="business_assets">Activos</string>
+    <string name="optionsdb">Opciones DB</string>
+    <string name="title_menu_app">Menu</string>
+    <string name="export_scan">Exportar scan</string>
+    <string name="import_db">Importar DB</string>
+    <string name="export_db">Exportar DB</string>
+    <string name="menu_options">Menu de opciones</string>
+    <string name="back_to_home">Regresar al menu</string>
+
+</resources>
