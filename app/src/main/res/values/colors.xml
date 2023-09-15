@@ -9,18 +9,16 @@
     <!--    Colors App-->
 
     <color name="blue">#4080FF</color>
-    <color name="blue_pastel">#4080FF</color>
+    <color name="blue_pastel">#4F85E3</color>
     <color name="blue_secondary">#0071D3</color>
     <color name="purple">#794DDD</color>
-    <color name="purple_pastel">#794DDD</color>
-    <color name="green">#4FC119</color>
-    <color name="red">#FF0404</color>
-    <color name="text_color">#727272</color>
-    <color name="black">#FF000000</color>
+    <color name="purple_pastel">#8F6FD6</color>
+    <color name="text_color">#5A5A5A</color>
+    <color name="black">#000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue_login">#00ADEE</color>
     <color  name="gray">#E9E9E9</color>
     <color  name="gray_white">#F4F4F4</color>
     <color  name="transparent">#00FFFFFF</color>
-    <color  name="yellow">#FFC107</color>
+    <color  name="yellow">#FF5722</color>
 </resources>

@@ -2,14 +2,11 @@ package com.semapaqr;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
-import com.semapaqr.activities.OptionsDataApp;
 import com.semapaqr.activities.QrReader;
 public class MainActivity extends AppCompatActivity{
 
@@ -33,11 +30,10 @@ public class MainActivity extends AppCompatActivity{
         btnOptionsDb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent(MainActivity.this, OptionsDataApp.class);
-                startActivity(intent2);
+                Intent intent = new Intent(MainActivity.this, QrReader.class);
+                startActivity(intent);
             }
         });
-
 
     }
 

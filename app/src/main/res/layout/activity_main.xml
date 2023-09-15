@@ -39,7 +39,7 @@
             android:backgroundTint="@color/blue"
             android:fontFamily="@font/poppins_semibold"
             android:padding="20dp"
-            android:text="@string/optionsdb"
+            android:text="@string/menu_options"
             android:textAllCaps="false"
             app:cornerRadius="28dp"
             app:icon="@drawable/ic_edit_computer"

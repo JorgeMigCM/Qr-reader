@@ -16,16 +16,7 @@
         android:theme="@style/Theme.App"
         tools:targetApi="31">
         <activity
-            android:name=".activities.OptionsDataApp"
-            android:screenOrientation="portrait"
-            android:exported="false" />
-        <activity
             android:name=".activities.QrReader"
-            android:screenOrientation="portrait"
-            android:exported="false"
-            android:theme="@style/Theme.AppPurple.backgroundPurple" />
-        <activity
-            android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/Theme.App.background">
@@ -34,6 +25,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            android:theme="@style/Theme.App.background">
+
         </activity>
         <activity android:name=".activities.CaptureActivityPortrait"
             android:screenOrientation="portrait"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/purple_background"
+    android:background="@drawable/background_app"
     android:orientation="horizontal"
     android:paddingStart="24dp"
     android:paddingTop="12dp"
@@ -16,7 +16,7 @@
         android:id="@+id/HeaderQrReader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
+        android:padding="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
-            android:text="@string/BusinessAssets"
+            android:text="@string/business_assets"
             android:textColor="@color/white"
             android:textSize="@dimen/headerTextSizeMenu"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,15 +34,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/BackToHome"
+            android:id="@+id/BtnOptionDB"
             android:layout_width="52dp"
             android:layout_height="52dp"
             android:background="@color/transparent"
-            android:contentDescription="@string/back_to_home"
-            android:src="@drawable/ic_logout"
+            android:contentDescription="@string/menu_options"
+            android:src="@drawable/ic_database"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -60,11 +61,12 @@
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_color_search"
             app:iconifiedByDefault="false"
+            android:layout_marginTop="8dp"
+            app:queryHint="@string/search_business_asset"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/Body"
             app:queryBackground="@color/transparent"
-            app:queryHint="Buscar activo"
             app:searchHintIcon="@color/blue"
             app:searchIcon="@drawable/ic_search" />
 
@@ -75,17 +77,15 @@
         android:id="@+id/BarCodeScanner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:backgroundTint="@color/purple"
-        android:contentDescription="@string/SearchBusinessAssets"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/blue"
+        android:contentDescription="@string/search_business_asset"
         android:src="@drawable/ic_barcode_scan_line"
-        app:borderWidth="0dp"
-        app:elevation="5dp"
-        app:fabCustomSize="72dp"
+        app:fabCustomSize="65dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:maxImageSize="42dp"
+        app:maxImageSize="38dp"
         app:tint="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

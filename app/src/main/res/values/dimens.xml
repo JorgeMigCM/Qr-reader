@@ -2,8 +2,8 @@
 <resources>
 
     <dimen name="headerTextSizeMenu">32sp</dimen>
-    <dimen name="textSizeDescriptionUser">18sp</dimen>
-    <dimen name="textSizeApp">12sp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="textSizeDescriptionUser">24sp</dimen>
+    <dimen name="textSizeMenu">16sp</dimen>
+    <dimen name="textApp">12dp</dimen>
 
 </resources>

@@ -1,59 +1,80 @@
 package com.semapaqr.activities;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.SearchView;
-import android.widget.TextView;
-
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.semapaqr.MainActivity;
 import com.semapaqr.R;
+
 
 public class QrReader extends AppCompatActivity {
 
-    private ImageButton BackToHome;
-    private FloatingActionButton BarCodeScanner;
+    private BottomSheetDialog bottomSheetDialog;
 
     private TextView TitleBusinessAssets;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_reader);
 
-        BackToHome = (ImageButton)findViewById(R.id.BackToHome);
+        ImageButton btnOptionDB = (ImageButton) findViewById(R.id.BtnOptionDB);
 
-        BarCodeScanner = (FloatingActionButton)findViewById(R.id.BarCodeScanner);
+        FloatingActionButton barCodeScanner = (FloatingActionButton) findViewById(R.id.BarCodeScanner);
         TitleBusinessAssets = (TextView)findViewById(R.id.TitleBusinessAssets);
 
-        BackToHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
+        btnOptionDB.setOnClickListener(v -> {
+            bottomSheetDialog = new BottomSheetDialog(QrReader.this, R.style.BottomSheetTheme);
+            View sheetview = LayoutInflater.from(getApplicationContext()).inflate(R.layout.bottommenu_layout,null);
+
+            sheetview.findViewById(R.id.ImportDB).setOnClickListener(v1 -> {
+                Toast.makeText(QrReader.this, "Click import DB", Toast.LENGTH_SHORT).show();
+                bottomSheetDialog.dismiss();
+            });
+            sheetview.findViewById(R.id.ExportDB).setOnClickListener(v2 -> {
+                Toast.makeText(QrReader.this, "Click export DB", Toast.LENGTH_SHORT).show();
+                bottomSheetDialog.dismiss();
+            });
+            sheetview.findViewById(R.id.ExportDBScan).setOnClickListener(new View.OnClickListener() {
+
+                final int a =2;
+                final int b =3;
+                final int c = a+b;
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(QrReader.this, "el resultado es "+c, Toast.LENGTH_SHORT).show();
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
+//            sheetview.findViewById(R.id.Cancel).setOnClickListener(v3 -> bottomSheetDialog.dismiss());
+
+            bottomSheetDialog.setContentView(sheetview);
+            bottomSheetDialog.show();
         });
 
-        BarCodeScanner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentIntegrator intentIntegrator = new IntentIntegrator(QrReader.this);
-                intentIntegrator.setOrientationLocked(false);
-                intentIntegrator.setCameraId(0);
-                intentIntegrator.setBeepEnabled(true);
-                intentIntegrator.setBarcodeImageEnabled(false);
-                intentIntegrator.setCaptureActivity(CaptureActivityPortrait.class);
-                intentIntegrator.setPrompt("ESCANEAR CODÍGO 🔍");
-                intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
-                intentIntegrator.initiateScan();
-            }
+        barCodeScanner.setOnClickListener(v -> {
+            IntentIntegrator intentIntegrator = new IntentIntegrator(QrReader.this);
+            intentIntegrator.setOrientationLocked(false);
+            intentIntegrator.setCameraId(0);
+            intentIntegrator.setBeepEnabled(false);
+            intentIntegrator.setBarcodeImageEnabled(false);
+            intentIntegrator.setCaptureActivity(CaptureActivityPortrait.class);
+            intentIntegrator.setPrompt("ESCANEAR CODIGO");
+            intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
+            intentIntegrator.initiateScan();
         });
     }
 
@@ -64,14 +85,12 @@ public class QrReader extends AppCompatActivity {
         if (intentResult != null){
             String contents = intentResult.getContents();
             if (contents != null){
-                TitleBusinessAssets.setText(intentResult.getContents());
+                TitleBusinessAssets.setText(contents.replaceAll("[^0-9]", ""));
             }
         }else{
             super.onActivityResult(requestCode, resultCode, data);
         }
 
-
-
-
     }
+
 }
