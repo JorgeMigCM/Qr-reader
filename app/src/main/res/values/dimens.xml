@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="headerTextSizeMenu">32sp</dimen>
-    <dimen name="textSizeDescriptionUser">24sp</dimen>
-    <dimen name="textSizeMenu">16sp</dimen>
+    <dimen name="headerTextSizeMenu">30dp</dimen>
+    <dimen name="textSizeDescriptionUser">24dp</dimen>
+    <dimen name="textSizeMenu">14dp</dimen>
     <dimen name="textApp">12dp</dimen>
 
 </resources>

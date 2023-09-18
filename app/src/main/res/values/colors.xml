@@ -13,12 +13,12 @@
     <color name="blue_secondary">#0071D3</color>
     <color name="purple">#794DDD</color>
     <color name="purple_pastel">#8F6FD6</color>
-    <color name="text_color">#5A5A5A</color>
+    <color name="text_color">#3F3F3F</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue_login">#00ADEE</color>
-    <color  name="gray">#E9E9E9</color>
-    <color  name="gray_white">#F4F4F4</color>
+    <color  name="gray">#EFEFEF</color>
+    <color  name="gray_white">#F8F9FD</color>
     <color  name="transparent">#00FFFFFF</color>
-    <color  name="yellow">#FF5722</color>
+    <color  name="yellow">#F44336</color>
 </resources>

@@ -8,7 +8,7 @@
         <item name="colorPrimaryVariant">@color/purple</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/purple_200</item>
+        <item name="colorSecondary">@color/blue</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
@@ -22,7 +22,7 @@
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/blue_login</item>
+        <item name="colorSecondary">@color/blue</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
@@ -30,12 +30,16 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Theme.App.background1">
+        <item name="android:windowBackground">@drawable/background_3</item>
+    </style>
+
     <style name="Theme.App.background">
-        <item name="android:windowBackground">@drawable/background_app</item>
+        <item name="android:windowBackground">@drawable/background_2</item>
     </style>
 
     <style name="Theme.AppPurple.backgroundPurple">
-        <item name="android:windowBackground">@drawable/purple_background</item>
+        <item name="android:windowBackground">@drawable/background_1</item>
     </style>
 
     <style name="BottomSheetTheme" parent="Theme.Design.Light.BottomSheetDialog">
@@ -44,8 +48,5 @@
     <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
     </style>
-    <style name="DialogAnimation" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
-        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
-    </style>
+
 </resources>

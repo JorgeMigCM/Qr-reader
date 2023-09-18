@@ -1,12 +1,33 @@
 <resources>
     <string name="app_name">Semapa Qr</string>
-    <string name="business_assets">Activo Fijo</string>
+    <string name="business_assets">Activos Semapa</string>
     <string name="title_menu_app">Menu</string>
-    <string name="export_scan">Exportar historial de lecturas</string>
-    <string name="import_db">Importar activos de excel</string>
-    <string name="export_db">Exportar activos .xlxl</string>
+    <string name="clean_db">Limpiar DB</string>
+    <string name="import_db">Importar datos de activos</string>
+    <string name="export_db">Exportar activos</string>
     <string name="menu_options">Opciones</string>
     <string name="back_to_home">Regresar al menu</string>
     <string name="search_business_asset">Buscar activo</string>
+    <string name="add_business_asset">Agregar nuevo activo</string>
+    <string name="type_business_asset">Tipo de activo</string>
+    <string name="ip_description">IP del activo</string>
+    <string name="business_asset_edit_text">Codigo de activo</string>
+    <string name="name_business_assets">Nombre de activo</string>
+    <string name="description_business_assets">Descripción del activo</string>
+    <string name="sector_business_asset">Sector</string>
+    <string name="sector_use_business_assets">Sector uso del activo</string>
+    <string name="attendat_business_assets">Encargado del activo</string>
+    <string name="person_use_business_assets">Persona que usa el activo</string>
+    <string name="cancel">cancel</string>
+    <string name="save_business_assets">guardar activo</string>
+    <string name="sector">Sector</string>
+    <string name="more_descripition">mas informacion</string>
+    <string name="code_business_asset">Codigo de activo</string>
+    <string name="name_business_asset">Nombre del activo</string>
+    <string name="description_business_asset">Descripción</string>
+    <string name="attendant_business_asset">Encargado</string>
+    <string name="persona_use_business_asset">Persona que usa el activo</string>
+    <string name="detail_business_asset">Detalle</string>
+    <string name="SE_">SE-</string>
 
 </resources>

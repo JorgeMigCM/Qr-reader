@@ -54,6 +54,54 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/AddBusinessAssets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_business_assets"
+                android:contentDescription="@string/add_business_asset"
+                android:layout_marginStart="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSizeMenu"
+                android:fontFamily="@font/poppins"
+                android:text="@string/add_business_asset"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/MoreCleanDB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/clean_db"
+                android:src="@drawable/ic_db_clean"
+                android:layout_marginStart="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins"
+                android:textSize="@dimen/textSizeMenu"
+                android:text="@string/clean_db"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/ImportDB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,30 +148,6 @@
                 android:fontFamily="@font/poppins"
                 android:textSize="@dimen/textSizeMenu"
                 android:text="@string/export_db"/>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ExportDBScan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:gravity="center_vertical"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/export_scan"
-                android:src="@drawable/ic_export_db_scan_rounded"
-                android:layout_marginStart="10dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:textColor="@color/white"
-                android:fontFamily="@font/poppins"
-                android:textSize="@dimen/textSizeMenu"
-                android:text="@string/export_scan"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
