@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="¿Borrar todos los activos?"
             android:textSize="20dp"
-            android:paddingTop="32dp"
+            android:paddingTop="36dp"
             android:gravity="center_horizontal"
             android:fontFamily="@font/poppins_semibold"
             app:layout_constraintTop_toTopOf="@id/layoutDialog"/>
@@ -36,20 +36,20 @@
                 android:id="@+id/CleanDB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="8dp"
                 android:backgroundTint="@color/yellow"
                 android:textAllCaps="false"
                 android:textAppearance="@font/poppins"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 android:text="Si"/>
             <Button
                 android:id="@+id/cancelBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="8dp"
                 android:backgroundTint="@color/purple"
                 android:textAppearance="@font/poppins"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 android:text="Cancelar"
                 android:textAllCaps="false"/>
         </LinearLayout>
@@ -57,8 +57,8 @@
 
     <ImageView
         android:id="@+id/imageClean"
-        android:layout_width="62dp"
-        android:layout_height="62dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:src="@drawable/ic_db_clean"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"

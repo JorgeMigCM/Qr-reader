@@ -1,17 +1,14 @@
 package com.semapaqr.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -29,9 +26,6 @@ import com.semapaqr.R;
 import com.semapaqr.db.Constants;
 import com.semapaqr.db.MyDbHelper;
 
-import java.io.File;
-import java.util.Calendar;
-import java.util.Locale;
 
 
 public class QrReader extends AppCompatActivity {
@@ -58,7 +52,7 @@ public class QrReader extends AppCompatActivity {
         FloatingActionButton barCodeScanner = (FloatingActionButton) findViewById(R.id.BarCodeScanner);
         //ReciclerView para los activos fijos
         businessAssetRv =(RecyclerView)findViewById(R.id.businessAssetRv);
-
+        //
         SearchView SearchBusinessAssets = (SearchView)findViewById(R.id.SearchBusinessAssets);
 
         //Busqueda de los activos
@@ -86,30 +80,33 @@ public class QrReader extends AppCompatActivity {
         btnOptionDB.setOnClickListener(v -> {
             bottomSheetDialog = new BottomSheetDialog(QrReader.this, R.style.BottomSheetTheme);
             View sheetview = LayoutInflater.from(getApplicationContext()).inflate(R.layout.bottommenu_layout,null);
-
+            //Boton para agregar activo
             sheetview.findViewById(R.id.AddBusinessAssets).setOnClickListener(v1 -> {
                 startActivity(new Intent(QrReader.this, AddBusinessAssetActivity.class));
                 bottomSheetDialog.dismiss();
             });
-
+            //Boton dialog para borrar todos los activos
             sheetview.findViewById(R.id.MoreCleanDB).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     showMoreCleanDBDialog();
                 }
             });
-
+            //Boton para importar datos
             sheetview.findViewById(R.id.ImportDB).setOnClickListener(v1 -> {
                 Toast.makeText(QrReader.this, "Click import DB", Toast.LENGTH_SHORT).show();
                 bottomSheetDialog.dismiss();
             });
+            //Boton para exportar datos
             sheetview.findViewById(R.id.ExportDB).setOnClickListener(v1 -> {
                 Toast.makeText(QrReader.this, "Click export DB", Toast.LENGTH_SHORT).show();
                 bottomSheetDialog.dismiss();
             });
-
-//            sheetview.findViewById(R.id.Cancel).setOnClickListener(v3 -> bottomSheetDialog.dismiss());
+            //Boton del manual
+            sheetview.findViewById(R.id.ManualPdf).setOnClickListener(v1 -> {
+                Toast.makeText(QrReader.this, "Click en manual DB", Toast.LENGTH_SHORT).show();
+                bottomSheetDialog.dismiss();
+            });
 
             bottomSheetDialog.setContentView(sheetview);
             bottomSheetDialog.show();

@@ -3,6 +3,7 @@
 
     <dimen name="headerTextSizeMenu">30dp</dimen>
     <dimen name="textSizeDescriptionUser">24dp</dimen>
+    <dimen name="textSizeMenuButton">16dp</dimen>
     <dimen name="textSizeMenu">14dp</dimen>
     <dimen name="textApp">12dp</dimen>
 

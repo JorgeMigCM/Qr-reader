@@ -19,6 +19,7 @@
     <color name="blue_login">#00ADEE</color>
     <color  name="gray">#EFEFEF</color>
     <color  name="gray_white">#F8F9FD</color>
+    <color  name="gray_black">#8A8A8A</color>
     <color  name="transparent">#00FFFFFF</color>
     <color  name="yellow">#F44336</color>
 </resources>
