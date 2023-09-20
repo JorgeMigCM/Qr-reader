@@ -1,91 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:paddingStart="24dp"
-    android:paddingTop="8dp"
-    android:paddingEnd="24dp"
+    android:background="@color/blue"
     tools:context=".activities.QrReader">
 
-
+    <RelativeLayout
+        android:id="@+id/TitleBusinessAssets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="20dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true">
         <TextView
-            android:id="@+id/TitleBusinessAssets"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/business_assets"
             android:textColor="@color/white"
             android:textSize="@dimen/headerTextSizeMenu"
-            android:elevation="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/MenuSearch"/>
+            android:layout_alignParentTop="true" />
+
+        <ImageButton
+            android:id="@+id/BtnOptionDB"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:backgroundTint="@color/transparent"
+            android:src="@drawable/ic_more_square"
+            android:contentDescription="@string/menu_options"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            app:tint="@color/white"/>
+
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:id="@+id/MenuSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TitleBusinessAssets">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/BtnOptionDB"
-            android:layout_toLeftOf="@id/BtnOptionDB"
-            android:orientation="vertical">
+        android:padding="20dp"
+        android:gravity="center"
+        android:layout_below="@+id/TitleBusinessAssets"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/SearchBusinessAssets"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_color_search"
                 app:iconifiedByDefault="false"
+                android:textAppearance="@font/poppins"
+                android:textAlignment="center"
+                app:queryHint="Buscar activo"
                 app:queryBackground="@color/transparent"
-                app:queryHint="@string/search_business_asset"
-                app:searchHintIcon="@color/blue"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignEnd="@+id/BtnOptionDB"
                 app:searchIcon="@drawable/ic_search" />
-
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/BtnOptionDB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/transparent"
-            android:padding="2dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="5dp"
-            android:src="@drawable/ic_server"
-            android:contentDescription="@string/cancel"/>
     </RelativeLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/Body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/MenuSearch">
+        android:background="@drawable/app_background"
+        android:paddingTop="3dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:layout_below="@+id/MenuSearch"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/businessAssetRv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/app_background"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/row_business_asset"
-            android:paddingTop="20dp"
-            android:paddingBottom="120dp"
             app:layout_constraintTop_toTopOf="@+id/Body"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -101,11 +101,10 @@
         android:backgroundTint="@color/blue"
         android:contentDescription="@string/search_business_asset"
         android:src="@drawable/ic_bar_code_scan"
-        app:fabCustomSize="66dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:maxImageSize="46dp"
-        app:tint="@color/white" />
+        app:fabCustomSize="68dp"
+        app:maxImageSize="48dp"
+        app:tint="@color/white"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

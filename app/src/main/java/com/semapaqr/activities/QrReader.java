@@ -104,7 +104,7 @@ public class QrReader extends AppCompatActivity {
             });
             //Boton del manual
             sheetview.findViewById(R.id.ManualPdf).setOnClickListener(v1 -> {
-                Toast.makeText(QrReader.this, "Click en manual DB", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(QrReader.this, ManualPDFActivity.class));
                 bottomSheetDialog.dismiss();
             });
 
@@ -115,10 +115,10 @@ public class QrReader extends AppCompatActivity {
 
         barCodeScanner.setOnClickListener(v -> {
             IntentIntegrator intentIntegrator = new IntentIntegrator(QrReader.this);
-            intentIntegrator.setOrientationLocked(false);
+            intentIntegrator.setOrientationLocked(true);
             intentIntegrator.setCameraId(0);
             intentIntegrator.setBeepEnabled(false);
-            intentIntegrator.setBarcodeImageEnabled(false);
+            intentIntegrator.setBarcodeImageEnabled(true);
             intentIntegrator.setCaptureActivity(CaptureActivityPortrait.class);
             intentIntegrator.setPrompt("Escane un codigo de barras o QR");
             intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);

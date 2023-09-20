@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="headerTextSizeMenu">30dp</dimen>
+    <dimen name="headerTextSizeMenu">28dp</dimen>
     <dimen name="textSizeDescriptionUser">24dp</dimen>
     <dimen name="textSizeMenuButton">16dp</dimen>
     <dimen name="textSizeMenu">14dp</dimen>

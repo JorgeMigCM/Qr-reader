@@ -4,13 +4,13 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:cardElevation="6dp"
+    app:cardElevation="4dp"
     app:contentPadding="2dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp"
-    android:layout_marginBottom="10dp"
-    app:cardCornerRadius="18dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="16dp"
     app:cardBackgroundColor="@color/gray_white">
 
     <RelativeLayout
@@ -28,7 +28,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:layout_toStartOf="@id/moreBtn"
-            android:layout_toLeftOf="@id/moreBtn"
             android:orientation="vertical">
 
             <LinearLayout
@@ -41,7 +40,7 @@
                     android:fontFamily="@font/poppins_semibold"
                     android:textColor="@color/black"
                     android:textSize="15dp"
-                    android:text="SE-"/>
+                    android:text="@string/SE_"/>
                 <TextView
                     android:id="@+id/codeBATv"
                     android:layout_width="match_parent"
@@ -76,8 +75,9 @@
             android:layout_marginEnd="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            app:tint="@color/gray_black" />
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/more_descripition"
+            app:tint="@color/text_color" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
