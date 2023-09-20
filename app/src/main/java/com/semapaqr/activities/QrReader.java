@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -55,6 +56,8 @@ public class QrReader extends AppCompatActivity {
         //
         SearchView SearchBusinessAssets = (SearchView)findViewById(R.id.SearchBusinessAssets);
 
+
+
         //Busqueda de los activos
         SearchBusinessAssets.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -94,7 +97,7 @@ public class QrReader extends AppCompatActivity {
             });
             //Boton para importar datos
             sheetview.findViewById(R.id.ImportDB).setOnClickListener(v1 -> {
-                Toast.makeText(QrReader.this, "Click import DB", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Mensaje de rpeuba", Toast.LENGTH_SHORT).show();
                 bottomSheetDialog.dismiss();
             });
             //Boton para exportar datos
@@ -144,6 +147,41 @@ public class QrReader extends AppCompatActivity {
                 onResume();
                 alertDialog.dismiss();
                 bottomSheetDialog.dismiss();
+            }
+        });
+        cancelBtn.findViewById(R.id.cancelBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        if (alertDialog.getWindow() != null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+    }
+
+    private void showMoreAddCodeScan(String BarCodeSet) {
+        ConstraintLayout addConstraintLayout = findViewById(R.id.addConstraintLayout);
+        View view = LayoutInflater.from(QrReader.this).inflate(R.layout.add_ba_database_dialog, addConstraintLayout);
+        Button addScanDBbtn = view.findViewById(R.id.addScanDBbtn);
+        Button cancelBtn = view.findViewById(R.id.cancelBtn);
+        TextView codeScan = view.findViewById(R.id.codeScan);
+
+        codeScan.setText(BarCodeSet);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(QrReader.this);
+        builder.setView(view);
+        final AlertDialog alertDialog = builder.create();
+
+        addScanDBbtn.findViewById(R.id.addScanDBbtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent intent = new Intent(QrReader.this, AddBusinessAssetActivity.class);
+                    intent.putExtra("RECORD_BARCODE", BarCodeSet);
+                    startActivity(intent);
+                    alertDialog.dismiss();
             }
         });
         cancelBtn.findViewById(R.id.cancelBtn).setOnClickListener(new View.OnClickListener() {
@@ -211,7 +249,8 @@ public class QrReader extends AppCompatActivity {
             intent.putExtra("RECORD_BARCODE", BarCodeSet);
             startActivity(intent);
         }else{
-            Toast.makeText(this, "Activo no encontrado: " + BarCodeSet, Toast.LENGTH_SHORT).show();
+
+            showMoreAddCodeScan(BarCodeSet);
         }
 
     }

@@ -3,27 +3,40 @@ package com.semapaqr.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.semapaqr.R;
+import com.semapaqr.db.Constants;
 import com.semapaqr.db.MyDbHelper;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 public class AddBusinessAssetActivity extends AppCompatActivity {
 
     private EditText codeBAEt, nameBAEt, typeBAEt, descriptionBAEt,
             sectorBAEt, attendantBAEt;
+    private String codigo;
+    private String recordBARCODE;
     private MyDbHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_business_asset);
 
+        Intent intent = getIntent();
+        recordBARCODE = intent.getStringExtra("RECORD_BARCODE");
+
         codeBAEt = findViewById(R.id.codeBAEt);
+        codeBAEt.setText(recordBARCODE);
         nameBAEt = findViewById(R.id.nameBAEt);
         typeBAEt = findViewById(R.id.typeBAEt);
         descriptionBAEt = findViewById(R.id.descriptionBAEt);
@@ -40,8 +53,9 @@ public class AddBusinessAssetActivity extends AppCompatActivity {
 
         cancelBtn.setOnClickListener(v -> finish());
 
-    }
 
+
+    }
     private void inputData() {
 
         String codigo_activo = ""+codeBAEt.getText().toString().trim();
@@ -51,8 +65,8 @@ public class AddBusinessAssetActivity extends AppCompatActivity {
         String sector_activo = ""+sectorBAEt.getText().toString().trim();
         String encargado_activo = ""+attendantBAEt.getText().toString().trim();
 
-
         String timestamp = ""+System.currentTimeMillis();
+
         long id = dbHelper.insertBusinessAssets(
                 ""+codigo_activo,
                 ""+nombre_activo,
