@@ -22,7 +22,7 @@
             android:textSize="20dp"
             android:paddingTop="36dp"
             android:gravity="center_horizontal"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/poppins_medium"
             app:layout_constraintTop_toTopOf="@id/layoutDialog"/>
 
         <LinearLayout
@@ -36,7 +36,10 @@
                 android:id="@+id/CleanDB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:backgroundTint="@color/yellow"
                 android:textAllCaps="false"
                 android:textAppearance="@font/poppins"
@@ -46,7 +49,10 @@
                 android:id="@+id/cancelBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:backgroundTint="@color/purple"
                 android:textAppearance="@font/poppins"
                 android:textSize="14dp"
