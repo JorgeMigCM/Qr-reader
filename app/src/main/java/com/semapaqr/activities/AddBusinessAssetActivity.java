@@ -17,7 +17,9 @@ import com.semapaqr.R;
 import com.semapaqr.db.Constants;
 import com.semapaqr.db.MyDbHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class AddBusinessAssetActivity extends AppCompatActivity {
@@ -26,6 +28,8 @@ public class AddBusinessAssetActivity extends AppCompatActivity {
             sectorBAEt, attendantBAEt;
     private String codigo;
     private String recordBARCODE;
+
+    Date date = new Date();
     private MyDbHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,7 @@ public class AddBusinessAssetActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         recordBARCODE = intent.getStringExtra("RECORD_BARCODE");
+
 
         codeBAEt = findViewById(R.id.codeBAEt);
         codeBAEt.setText(recordBARCODE);
@@ -57,6 +62,8 @@ public class AddBusinessAssetActivity extends AppCompatActivity {
 
     }
     private void inputData() {
+        SimpleDateFormat fecha = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
+
 
         String codigo_activo = ""+codeBAEt.getText().toString().trim();
         String nombre_activo = ""+nameBAEt.getText().toString().trim();
@@ -65,7 +72,7 @@ public class AddBusinessAssetActivity extends AppCompatActivity {
         String sector_activo = ""+sectorBAEt.getText().toString().trim();
         String encargado_activo = ""+attendantBAEt.getText().toString().trim();
 
-        String timestamp = ""+System.currentTimeMillis();
+        String timestamp = fecha.format(date);
 
         long id = dbHelper.insertBusinessAssets(
                 ""+codigo_activo,

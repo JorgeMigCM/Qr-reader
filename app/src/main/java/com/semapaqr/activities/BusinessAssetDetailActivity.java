@@ -22,7 +22,9 @@ import com.semapaqr.R;
 import com.semapaqr.db.Constants;
 import com.semapaqr.db.MyDbHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class BusinessAssetDetailActivity extends AppCompatActivity {
@@ -33,7 +35,7 @@ public class BusinessAssetDetailActivity extends AppCompatActivity {
 
     private String id, codigo, nombre, tipo, descripcion, sector, encargado, addedTime, updateTime;
     MyDbHelper dbHelper;
-
+    Date date = new Date();
     private String recordBARCODE, recordID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,13 +92,6 @@ public class BusinessAssetDetailActivity extends AppCompatActivity {
                 addedTime = ""+cursor.getString(cursor.getColumnIndex(Constants.C_ADDED_TIMESTAMP));
                 updateTime = ""+cursor.getString(cursor.getColumnIndex(Constants.C_UPDATED_TIMESTAMP));
 
-                Calendar calendar1 = Calendar.getInstance(Locale.getDefault());
-                calendar1.setTimeInMillis(Long.parseLong(addedTime));
-                String timeAdded = ""+ DateFormat.format("dd/MM/yyyy hh:mm:aa", calendar1);
-
-                Calendar calendar2 = Calendar.getInstance(Locale.getDefault());
-                calendar2.setTimeInMillis(Long.parseLong(updateTime));
-                String timeUpdated = ""+DateFormat.format("dd/MM/yyyy hh:mm:aa", calendar2);
 
                 //set data
                 TitleBA.setText(codigo);
@@ -106,8 +101,8 @@ public class BusinessAssetDetailActivity extends AppCompatActivity {
                 descriptionBATv.setText(descripcion);
                 sectorBATv.setText(sector);
                 attendantBATv.setText(encargado);
-                addedTimeTv.setText(timeAdded);
-                updateTimeTv.setText(timeUpdated);
+                addedTimeTv.setText(addedTime);
+                updateTimeTv.setText(updateTime);
 
 
             }while (cursor.moveToNext());
@@ -119,6 +114,7 @@ public class BusinessAssetDetailActivity extends AppCompatActivity {
     }
 
     private void editBusinessAsset(){
+        SimpleDateFormat fecha = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
 
         String codigo_activo = ""+codeBATv.getText().toString().trim();
         String nombre_activo = ""+nameBATv.getText().toString().trim();
@@ -127,7 +123,7 @@ public class BusinessAssetDetailActivity extends AppCompatActivity {
         String sector_activo = ""+sectorBATv.getText().toString().trim();
         String encargado_activo = ""+attendantBATv.getText().toString().trim();
 
-        String timestamp = "" + System.currentTimeMillis();
+        String timestamp = fecha.format(date);
 
         dbHelper.updateBusinessAsset(
                 ""+id,

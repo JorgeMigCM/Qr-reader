@@ -1,5 +1,6 @@
 package com.semapaqr.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -27,25 +28,32 @@ import com.semapaqr.R;
 import com.semapaqr.db.Constants;
 import com.semapaqr.db.MyDbHelper;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class QrReader extends AppCompatActivity {
-
     private BottomSheetDialog bottomSheetDialog;
-
     private RecyclerView businessAssetRv;
-
-
     private MyDbHelper dbHelper;
-
-
-
-
+    Date date = new Date();
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_reader);
 
+        context = this;
 
         //Boton para mas opciones
         ImageButton btnOptionDB = (ImageButton) findViewById(R.id.BtnOptionDB);
@@ -55,8 +63,6 @@ public class QrReader extends AppCompatActivity {
         businessAssetRv =(RecyclerView)findViewById(R.id.businessAssetRv);
         //
         SearchView SearchBusinessAssets = (SearchView)findViewById(R.id.SearchBusinessAssets);
-
-
 
         //Busqueda de los activos
         SearchBusinessAssets.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -96,9 +102,14 @@ public class QrReader extends AppCompatActivity {
                 }
             });
             //Boton para importar datos
-            sheetview.findViewById(R.id.ImportDB).setOnClickListener(v1 -> {
-                Toast.makeText(this, "Mensaje de rpeuba", Toast.LENGTH_SHORT).show();
-                bottomSheetDialog.dismiss();
+            sheetview.findViewById(R.id.ImportDB).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    uploadExcel(QrReader.this);
+                    onResume();
+                    Toast.makeText(QrReader.this, "Datos cargados", Toast.LENGTH_SHORT).show();
+                    bottomSheetDialog.dismiss();
+                }
             });
             //Boton para exportar datos
             sheetview.findViewById(R.id.ExportDB).setOnClickListener(v1 -> {
@@ -115,6 +126,7 @@ public class QrReader extends AppCompatActivity {
             bottomSheetDialog.show();
         });
 
+        //boton del escaner
 
         barCodeScanner.setOnClickListener(v -> {
             IntentIntegrator intentIntegrator = new IntentIntegrator(QrReader.this);
@@ -197,10 +209,15 @@ public class QrReader extends AppCompatActivity {
         alertDialog.show();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadBusinessAssets();
+    }
+
     private void loadBusinessAssets() {
         AdapterBusinessAssets adapterBusinessAssets = new AdapterBusinessAssets(QrReader.this,
                 dbHelper.getAllBusinessAssets(Constants.C_ADDED_TIMESTAMP + " DESC"));
-
         businessAssetRv.setAdapter(adapterBusinessAssets);
     }
 
@@ -210,13 +227,6 @@ public class QrReader extends AppCompatActivity {
 
         businessAssetRv.setAdapter(adapterBusinessAssets);
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadBusinessAssets();
-    }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -255,4 +265,74 @@ public class QrReader extends AppCompatActivity {
 
     }
 
+    private void cargardatosSQL(Context context){
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        try {
+            InputStream inputStream = context.getAssets().open("");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                // Ejecuta cada sentencia SQL en el archivo
+                db.execSQL(line);
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void uploadExcel(Context context){
+        try {
+            // Abre el archivo Excel desde los recursos (puedes cargarlo desde donde quieras)
+            InputStream inputStream = context.getAssets().open("rep1.xlsx");
+            // Crea un libro de trabajo (workbook) a partir del flujo de entrada
+            Workbook workbook = new XSSFWorkbook(inputStream);
+            // Obtén la hoja de trabajo (worksheet) que deseas leer
+            Sheet sheet = workbook.getSheetAt(0);
+            // Supongamos que la primera fila de tu archivo Excel contiene los nombres de los campos
+            Row headerRow = sheet.getRow(0);
+
+            for (Row row : sheet) {
+                if (row.getRowNum() == 0) {
+                    // Saltar la primera fila que contiene encabezados
+                    continue;
+                }
+                String codigo_activo = row.getCell(1).getStringCellValue();
+                String nombre_activo = row.getCell(2).getStringCellValue();
+                String tipo_activo = row.getCell(3).getStringCellValue();
+                String descripcion_activo = row.getCell(4).getStringCellValue();
+                String sector_activo = row.getCell(5).getStringCellValue();
+                String encargado_activo = row.getCell(6).getStringCellValue();
+                String addedTime = getCurrentTimestamp(); // Puedes obtener la fecha actual como desees
+                String updateTime = getCurrentTimestamp(); // Puedes obtener la fecha actual como desees
+
+                // Inserta los datos en la base de datos SQLite utilizando tu MyDbHelper
+                MyDbHelper dbHelper = new MyDbHelper(this);
+                long id = dbHelper.insertBusinessAssets(
+                        ""+codigo_activo,
+                        ""+nombre_activo,
+                        ""+tipo_activo,
+                        ""+descripcion_activo,
+                        ""+sector_activo,
+                        ""+encargado_activo,
+                        ""+addedTime,
+                        ""+updateTime);
+                dbHelper.close();
+            }
+
+            // Cierra el flujo de entrada
+            inputStream.close();
+            workbook.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String getCurrentTimestamp() {
+        SimpleDateFormat fecha = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
+        String timestamp = fecha.format(date);
+        // Implementa la lógica para obtener la fecha y hora actual según tus necesidades
+        return  ""+timestamp; // Ejemplo: devuelve una cadena con la fecha y hora actual
+    }
 }
