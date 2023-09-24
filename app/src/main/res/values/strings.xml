@@ -2,8 +2,8 @@
     <string name="app_name">Semapa Qr</string>
     <string name="business_assets">Activos Semapa</string>
     <string name="title_menu_app">Menu</string>
-    <string name="clean_db">Borrar DB</string>
-    <string name="import_db">Cargar DB</string>
+    <string name="clean_db">Borrar Datos</string>
+    <string name="import_db">Activos APP</string>
     <string name="import_db_document">Importar Excel</string>
     <string name="menu_options">Opciones</string>
     <string name="back_to_home">Regresar al menu</string>

@@ -110,44 +110,10 @@ public class QrReader extends AppCompatActivity {
             sheetview.findViewById(R.id.ImportDB).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    progressBar = findViewById(R.id.progressBar);
-                    TextView loadingText = findViewById(R.id.loadingText);
-                    if (progressBar != null) {
-                        progressBar.setVisibility(View.VISIBLE);
-                        View overlayLayout = findViewById(R.id.overlayLayout);
-                        getWindow().setStatusBarColor(ContextCompat.getColor(QrReader.this, R.color.black));
-                        overlayLayout.setVisibility(View.VISIBLE);
-                        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                    }
-                    if (loadingText != null) {
-                        loadingText.setVisibility(View.VISIBLE);
-                    }
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            uploadExcel(QrReader.this);
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (progressBar != null) {
-                                        progressBar.setVisibility(View.GONE);
-                                        View overlayLayout = findViewById(R.id.overlayLayout);
-                                        overlayLayout.setVisibility(View.GONE);
-                                        getWindow().setStatusBarColor(ContextCompat.getColor(QrReader.this, R.color.blue));
-                                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                                    }
-                                    if (loadingText != null) {
-                                        loadingText.setVisibility(View.GONE);
-                                    }
-                                    onResume();
-                                    Toast.makeText(QrReader.this, "Datos cargados", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    }).start();
-                    bottomSheetDialog.dismiss();
+                    UploadDialog();
                 }
             });
+            //Boton para importar datos desde almacenamiento
             sheetview.findViewById(R.id.ImportDBDocument).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -179,6 +145,7 @@ public class QrReader extends AppCompatActivity {
     }
 
     private void showMoreCleanDBDialog() {
+
         ConstraintLayout deleteConstraintLayout = findViewById(R.id.deleteConstraintLayout);
         View view = LayoutInflater.from(QrReader.this).inflate(R.layout.delete_database_dialog, deleteConstraintLayout);
         Button CleanDB = view.findViewById(R.id.CleanDB);
@@ -210,6 +177,76 @@ public class QrReader extends AppCompatActivity {
         }
         alertDialog.show();
     }
+
+
+    private void UploadDialog() {
+
+        ConstraintLayout deleteConstraintLayout = findViewById(R.id.uploadConstraintLayout);
+        View view = LayoutInflater.from(QrReader.this).inflate(R.layout.upload_database_dialog, deleteConstraintLayout);
+        Button CleanDB = view.findViewById(R.id.addUpDBbtn);
+        Button cancelBtn = view.findViewById(R.id.cancelBtn);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(QrReader.this);
+        builder.setView(view);
+        final AlertDialog alertDialog = builder.create();
+
+        CleanDB.findViewById(R.id.addUpDBbtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                progressBar = findViewById(R.id.progressBar);
+                TextView loadingText = findViewById(R.id.loadingText);
+                if (progressBar != null) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    View overlayLayout = findViewById(R.id.overlayLayout);
+                    getWindow().setStatusBarColor(ContextCompat.getColor(QrReader.this, R.color.black));
+                    overlayLayout.setVisibility(View.VISIBLE);
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                }
+                if (loadingText != null) {
+                    loadingText.setVisibility(View.VISIBLE);
+                }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        uploadExcel(QrReader.this);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (progressBar != null) {
+                                    progressBar.setVisibility(View.GONE);
+                                    View overlayLayout = findViewById(R.id.overlayLayout);
+                                    overlayLayout.setVisibility(View.GONE);
+                                    getWindow().setStatusBarColor(ContextCompat.getColor(QrReader.this, R.color.blue));
+                                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                }
+                                if (loadingText != null) {
+                                    loadingText.setVisibility(View.GONE);
+                                }
+                                onResume();
+                                Toast.makeText(QrReader.this, "Datos cargados", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }).start();
+                alertDialog.dismiss();
+                bottomSheetDialog.dismiss();
+            }
+        });
+        cancelBtn.findViewById(R.id.cancelBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        if (alertDialog.getWindow() != null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+    }
+
+
 
     private void showMoreAddCodeScan(String BarCodeSet) {
         ConstraintLayout addConstraintLayout = findViewById(R.id.addConstraintLayout);
@@ -270,9 +307,6 @@ public class QrReader extends AppCompatActivity {
 
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
-
-
-
         if (result != null){
             String contents = result.getContents();
             if (contents != null){
@@ -282,8 +316,6 @@ public class QrReader extends AppCompatActivity {
         }else{
             super.onActivityResult(requestCode, resultCode, data);
         }
-
-
         if (requestCode == REQUEST_PICK_FILE && resultCode == RESULT_OK) {
             if (data != null && data.getData() != null) {
                 Uri selectedFileUri = data.getData();
@@ -376,8 +408,8 @@ public class QrReader extends AppCompatActivity {
 
     private void uploadExcel(Context context){
         try {
-            InputStream inputStream = context.getAssets().open("rep1.xls");
-            Workbook workbook = new HSSFWorkbook(inputStream);
+            InputStream inputStream = context.getAssets().open("rep1.xlsx");
+            Workbook workbook = new XSSFWorkbook(inputStream);
             Sheet sheet = workbook.getSheetAt(0);
             Row headerRow = sheet.getRow(0);
 
@@ -386,15 +418,15 @@ public class QrReader extends AppCompatActivity {
                     continue;
                 }
                 String codigo_activo = row.getCell(0).getStringCellValue();
-                String nombre_activo = row.getCell(15).getStringCellValue();
-                String tipo_activo = row.getCell(16).getStringCellValue();
-                String descripcion_activo = row.getCell(1).getStringCellValue();
+                String nombre_activo = row.getCell(1).getStringCellValue();
+                String tipo_activo = row.getCell(2).getStringCellValue();
+                String descripcion_activo = row.getCell(3).getStringCellValue();
                 //limitar registro del campo descripicion a 30 caracteres
 //                if (descripcion_activo.length() > 30) {
 //                    descripcion_activo = descripcion_activo.substring(0, 30);
 //                }
-                String sector_activo = row.getCell(17).getStringCellValue();
-                String encargado_activo = row.getCell(18).getStringCellValue();
+                String sector_activo = row.getCell(4).getStringCellValue();
+                String encargado_activo = row.getCell(5).getStringCellValue();
                 String addedTime = getCurrentTimestamp();
                 String updateTime = getCurrentTimestamp();
 
@@ -446,8 +478,8 @@ public class QrReader extends AppCompatActivity {
                     continue;
                 }
                 String codigo_activo = row.getCell(0).getStringCellValue();
-                String nombre_activo = row.getCell(15).getStringCellValue();
-                String tipo_activo = row.getCell(16).getStringCellValue();
+                String nombre_activo = row.getCell(16).getStringCellValue();
+                String tipo_activo = row.getCell(15).getStringCellValue();
                 String descripcion_activo = row.getCell(1).getStringCellValue();
                 String sector_activo = row.getCell(17).getStringCellValue();
                 String encargado_activo = row.getCell(18).getStringCellValue();
