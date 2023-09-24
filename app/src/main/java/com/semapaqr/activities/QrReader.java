@@ -270,54 +270,7 @@ public class QrReader extends AppCompatActivity {
 
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_PICK_FILE && resultCode == RESULT_OK) {
-            if (data != null && data.getData() != null) {
 
-                Uri selectedFileUri = data.getData();
-
-
-
-
-                progressBar = findViewById(R.id.progressBar);
-                TextView loadingText = findViewById(R.id.loadingText);
-                if (progressBar != null) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    View overlayLayout = findViewById(R.id.overlayLayout);
-                    getWindow().setStatusBarColor(ContextCompat.getColor(QrReader.this, R.color.black));
-                    overlayLayout.setVisibility(View.VISIBLE);
-                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                }
-                if (loadingText != null) {
-                    loadingText.setVisibility(View.VISIBLE);
-                }
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        uploadExcelDocument(selectedFileUri);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (progressBar != null) {
-                                    progressBar.setVisibility(View.GONE);
-                                    View overlayLayout = findViewById(R.id.overlayLayout);
-                                    overlayLayout.setVisibility(View.GONE);
-                                    getWindow().setStatusBarColor(ContextCompat.getColor(QrReader.this, R.color.blue));
-                                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                                }
-                                if (loadingText != null) {
-                                    loadingText.setVisibility(View.GONE);
-                                }
-                                onResume();
-                                Toast.makeText(QrReader.this, "Datos cargados", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }).start();
-                bottomSheetDialog.dismiss();
-
-
-            }
-        }
 
 
         if (result != null){
@@ -328,6 +281,57 @@ public class QrReader extends AppCompatActivity {
             }
         }else{
             super.onActivityResult(requestCode, resultCode, data);
+        }
+
+
+        if (requestCode == REQUEST_PICK_FILE && resultCode == RESULT_OK) {
+            if (data != null && data.getData() != null) {
+                Uri selectedFileUri = data.getData();
+
+                // Verificar el tipo de archivo
+                if (selectedFileUri.getLastPathSegment().endsWith(".xls") || selectedFileUri.getLastPathSegment().endsWith(".xlsx")) {
+                    // Archivo de Excel válido
+                    progressBar = findViewById(R.id.progressBar);
+                    TextView loadingText = findViewById(R.id.loadingText);
+                    if (progressBar != null) {
+                        progressBar.setVisibility(View.VISIBLE);
+                        View overlayLayout = findViewById(R.id.overlayLayout);
+                        getWindow().setStatusBarColor(ContextCompat.getColor(QrReader.this, R.color.black));
+                        overlayLayout.setVisibility(View.VISIBLE);
+                        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    }
+                    if (loadingText != null) {
+                        loadingText.setVisibility(View.VISIBLE);
+                    }
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            uploadExcelDocument(selectedFileUri);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (progressBar != null) {
+                                        progressBar.setVisibility(View.GONE);
+                                        View overlayLayout = findViewById(R.id.overlayLayout);
+                                        overlayLayout.setVisibility(View.GONE);
+                                        getWindow().setStatusBarColor(ContextCompat.getColor(QrReader.this, R.color.blue));
+                                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                    }
+                                    if (loadingText != null) {
+                                        loadingText.setVisibility(View.GONE);
+                                    }
+                                    Toast.makeText(QrReader.this, "Datos cargados", Toast.LENGTH_SHORT).show();
+                                    onResume();
+                                }
+                            });
+                        }
+                    }).start();
+                    bottomSheetDialog.dismiss();
+                } else {
+                    // Mostrar mensaje de error si no es un archivo de Excel
+                    Toast.makeText(QrReader.this, "Seleccione un archivo Excel", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
 
     }
@@ -430,7 +434,7 @@ public class QrReader extends AppCompatActivity {
                 // Si es un archivo .xlsx
                 workbook = new XSSFWorkbook(inputStream);
             } else {
-                Toast.makeText(context, "Archivo excel", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Seleccione un archivo excel .xlsx o .xls", Toast.LENGTH_SHORT).show();
                 return;
             }
 
