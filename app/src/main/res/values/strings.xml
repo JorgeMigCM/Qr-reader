@@ -4,7 +4,7 @@
     <string name="title_menu_app">Menu</string>
     <string name="clean_db">Borrar DB</string>
     <string name="import_db">Cargar DB</string>
-    <string name="export_db">Exportar DB</string>
+    <string name="import_db_document">Importar Excel</string>
     <string name="menu_options">Opciones</string>
     <string name="back_to_home">Regresar al menu</string>
     <string name="search_business_asset">Buscar activo</string>

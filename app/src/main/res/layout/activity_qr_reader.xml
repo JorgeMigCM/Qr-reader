@@ -66,6 +66,7 @@
                 app:searchIcon="@drawable/ic_search" />
     </RelativeLayout>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/Body"
         android:layout_width="match_parent"
@@ -79,6 +80,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true">
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/businessAssetRv"
             android:layout_width="match_parent"
@@ -88,23 +90,54 @@
             tools:listitem="@layout/row_business_asset"
             app:layout_constraintTop_toTopOf="@+id/Body"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="visible"/>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/BarCodeScanner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
+            android:backgroundTint="@color/blue"
+            android:contentDescription="@string/search_business_asset"
+            android:src="@drawable/ic_bar_code_scan"
+            app:fabCustomSize="68dp"
+            app:maxImageSize="48dp"
+            app:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/BarCodeScanner"
+    <FrameLayout
+        android:id="@+id/overlayLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:visibility="gone"
+        android:theme="@style/Theme.Black"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:theme="@style/Theme.Black"/>
+
+    <TextView
+        android:id="@+id/loadingText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="26dp"
-        android:backgroundTint="@color/blue"
-        android:contentDescription="@string/search_business_asset"
-        android:src="@drawable/ic_bar_code_scan"
-        app:fabCustomSize="68dp"
-        app:maxImageSize="48dp"
-        app:tint="@color/white"
+        android:layout_alignTop="@+id/progressBar"
         android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true"/>
+        android:fontFamily="@font/poppins"
+        android:paddingTop="80dp"
+        android:textColor="@color/white"
+        android:text="Cargando datos..."
+        android:textSize="24dp"
+        android:visibility="gone"
+        tools:text="Cargando datos..." />
 
 </RelativeLayout>
