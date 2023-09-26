@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.semapaqr.R;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 

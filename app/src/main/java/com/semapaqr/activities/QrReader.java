@@ -1,17 +1,13 @@
 package com.semapaqr.activities;
 
-import static com.google.zxing.integration.android.IntentIntegrator.REQUEST_CODE;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +23,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,12 +40,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -69,6 +59,7 @@ public class QrReader extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_reader);
+
 
         context = this;
         dbHelper = new MyDbHelper(this);
@@ -124,9 +115,20 @@ public class QrReader extends AppCompatActivity {
                 }
             });
 
+            sheetview.findViewById(R.id.JorgeM).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String url = "https://www.linkedin.com/in/jorge-miguel-cervantes-mamani";
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent);
+                }
+            });
+
             bottomSheetDialog.setContentView(sheetview);
             bottomSheetDialog.show();
         });
+
+
 
         //boton del escaner
 
@@ -138,9 +140,12 @@ public class QrReader extends AppCompatActivity {
             intentIntegrator.setBarcodeImageEnabled(true);
             intentIntegrator.setCaptureActivity(CaptureActivityPortrait.class);
             intentIntegrator.setPrompt("Escane un codigo de barras o QR");
-            intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
+            intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.CODE_39, IntentIntegrator.CODE_93, IntentIntegrator.CODE_128,
+                    IntentIntegrator.EAN_8, IntentIntegrator.EAN_13, IntentIntegrator.UPC_A, IntentIntegrator.UPC_E);
             intentIntegrator.initiateScan();
         });
+
+
 
     }
 
@@ -177,7 +182,6 @@ public class QrReader extends AppCompatActivity {
         }
         alertDialog.show();
     }
-
 
     private void UploadDialog() {
 
@@ -316,6 +320,7 @@ public class QrReader extends AppCompatActivity {
         }else{
             super.onActivityResult(requestCode, resultCode, data);
         }
+
         if (requestCode == REQUEST_PICK_FILE && resultCode == RESULT_OK) {
             if (data != null && data.getData() != null) {
                 Uri selectedFileUri = data.getData();
@@ -389,22 +394,23 @@ public class QrReader extends AppCompatActivity {
 
     }
 
-    private void cargardatosSQL(Context context){
 
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        try {
-            InputStream inputStream = context.getAssets().open("");
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                // Ejecuta cada sentencia SQL en el archivo
-                db.execSQL(line);
-            }
-            bufferedReader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void cargardatosSQL(Context context){
+//
+//        SQLiteDatabase db = dbHelper.getWritableDatabase();
+//        try {
+//            InputStream inputStream = context.getAssets().open("");
+//            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+//            String line;
+//            while ((line = bufferedReader.readLine()) != null) {
+//                // Ejecuta cada sentencia SQL en el archivo
+//                db.execSQL(line);
+//            }
+//            bufferedReader.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private void uploadExcel(Context context){
         try {
@@ -466,7 +472,7 @@ public class QrReader extends AppCompatActivity {
                 // Si es un archivo .xlsx
                 workbook = new XSSFWorkbook(inputStream);
             } else {
-                    Toast.makeText(context, "Seleccione un archivo excel .xlsx o .xls", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Seleccione un archivo excel", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -513,4 +519,5 @@ public class QrReader extends AppCompatActivity {
         String timestamp = fecha.format(date);
         return  ""+timestamp;
     }
+
 }

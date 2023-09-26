@@ -43,156 +43,189 @@
 
     <GridLayout
         android:id="@+id/LayoutMenu"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:rowCount="1"
-        android:columnCount="2"
-        android:layout_marginTop="10dp"
+        android:rowCount="2"
+        android:columnCount="1"
+        android:isScrollContainer="true"
         app:layout_constraintTop_toBottomOf="@+id/HeaderTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/AddBusinessAssets"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_add_business_assets"
-                android:layout_marginBottom="4dp"
-                android:contentDescription="@string/add_business_asset"/>
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textApp"
-                android:textAlignment="center"
-                android:fontFamily="@font/poppins"
-                android:text="@string/add_business_asset"/>
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ImportDB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-            <ImageView
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/AddBusinessAssets"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:src="@drawable/ic_import_db_rounded"
-                android:contentDescription="@string/import_db"/>
-            <TextView
-                android:layout_width="80dp"
+                android:padding="12dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:src="@drawable/ic_add_business_assets"
+                    android:layout_marginBottom="6dp"
+                    android:contentDescription="@string/add_business_asset"/>
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textAppmin"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/add_business_asset"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ImportDB"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginBottom="6dp"
+                    android:src="@drawable/ic_import_db_rounded"
+                    android:contentDescription="@string/import_db"/>
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="@string/import_db"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/textAppmin"
+                    android:fontFamily="@font/poppins"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/MoreCleanDB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginBottom="6dp"
+                    android:contentDescription="@string/clean_db"
+                    android:src="@drawable/ic_db_clean"/>
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/textAppmin"
+                    android:text="@string/clean_db"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ImportDBDocument"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginBottom="6dp"
+                    android:contentDescription="@string/import_db_document"
+                    android:src="@drawable/ic_excel1"/>
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/textAppmin"
+                    android:text="@string/import_db_document"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <!--        <androidx.appcompat.widget.LinearLayoutCompat-->
+            <!--            android:id="@+id/ManualPdf"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginTop="16dp"-->
+            <!--            android:layout_marginStart="16dp"-->
+            <!--            android:layout_marginEnd="16dp"-->
+            <!--            android:layout_marginBottom="8dp"-->
+            <!--            android:gravity="center"-->
+            <!--            android:orientation="vertical"-->
+            <!--            app:layout_constraintTop_toTopOf="parent"-->
+            <!--            app:layout_constraintStart_toStartOf="parent"-->
+            <!--            app:layout_constraintEnd_toEndOf="parent">-->
+            <!--            <ImageView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginBottom="4dp"-->
+            <!--                android:contentDescription="@string/manual_help"-->
+            <!--                android:src="@drawable/ic_pdf"/>-->
+            <!--            <TextView-->
+            <!--                android:layout_width="80dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:textColor="@color/white"-->
+            <!--                android:fontFamily="@font/poppins"-->
+            <!--                android:textAlignment="center"-->
+            <!--                android:textSize="@dimen/textApp"-->
+            <!--                android:text="@string/manual_help"/>-->
+            <!--        </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Desing by "
                 android:textColor="@color/white"
-                android:text="@string/import_db"
-                android:textAlignment="center"
                 android:textSize="@dimen/textApp"
-                android:fontFamily="@font/poppins"/>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/MoreCleanDB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:contentDescription="@string/clean_db"
-                android:src="@drawable/ic_db_clean"/>
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textAlignment="center"
                 android:fontFamily="@font/poppins"
-                android:textAlignment="center"
-                android:textSize="@dimen/textApp"
-                android:text="@string/clean_db"/>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/ImportDBDocument"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-            <ImageView
+                />
+            <TextView
+                android:id="@+id/JorgeM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:contentDescription="@string/import_db_document"
-                android:src="@drawable/ic_excel"/>
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
+                android:text="JorgeM, "
                 android:textColor="@color/white"
-                android:fontFamily="@font/poppins"
-                android:textAlignment="center"
                 android:textSize="@dimen/textApp"
-                android:text="@string/import_db_document"/>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-<!--        <androidx.appcompat.widget.LinearLayoutCompat-->
-<!--            android:id="@+id/ManualPdf"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:layout_marginEnd="16dp"-->
-<!--            android:layout_marginBottom="8dp"-->
-<!--            android:gravity="center"-->
-<!--            android:orientation="vertical"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent">-->
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginBottom="4dp"-->
-<!--                android:contentDescription="@string/manual_help"-->
-<!--                android:src="@drawable/ic_pdf"/>-->
-<!--            <TextView-->
-<!--                android:layout_width="80dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:fontFamily="@font/poppins"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textSize="@dimen/textApp"-->
-<!--                android:text="@string/manual_help"/>-->
-<!--        </androidx.appcompat.widget.LinearLayoutCompat>-->
+                android:textAlignment="center"
+                android:fontFamily="@font/poppins_bold"
+                android:autoLink="web"/>
+            <TextView
+                android:id="@+id/Gabriel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gabriel."
+                android:textColor="@color/white"
+                android:textSize="@dimen/textApp"
+                android:textAlignment="center"
+                android:fontFamily="@font/poppins_bold"
+                android:autoLink="web"/>
+        </LinearLayout>
 
     </GridLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

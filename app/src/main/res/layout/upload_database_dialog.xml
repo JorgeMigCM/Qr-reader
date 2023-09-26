@@ -19,7 +19,7 @@
             android:id="@+id/addDbUpTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Los datos importados seran de:"
+            android:text="Los datos importados seran de"
             android:textSize="16dp"
             android:paddingTop="36dp"
             android:gravity="center_horizontal"

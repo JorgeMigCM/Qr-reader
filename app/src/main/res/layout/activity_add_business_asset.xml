@@ -44,6 +44,7 @@ tools:context=".activities.AddBusinessAssetActivity">
                 android:layout_height="wrap_content"
                 android:hint="@string/business_asset_edit_text"
                 app:boxBackgroundMode="none"
+                app:hintTextAppearance="@style/TextLabel"
                 app:layout_constraintTop_toBottomOf="@+id/creatNameUserLayaout">
 
                 <EditText

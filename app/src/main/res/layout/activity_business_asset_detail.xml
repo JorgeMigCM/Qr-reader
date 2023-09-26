@@ -81,6 +81,7 @@
                         android:padding="8dp"
                         android:fontFamily="@font/poppins"
                         android:textSize="@dimen/textSizeMenu"
+                        android:layout_marginBottom="8dp"
                         tools:text="1234567890" />
                 </LinearLayout>
 

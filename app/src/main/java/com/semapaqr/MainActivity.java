@@ -4,36 +4,30 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 
 import com.semapaqr.activities.QrReader;
 public class MainActivity extends AppCompatActivity{
 
-    private Button btnQrReader, btnOptionsDb;
+    Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnQrReader = (Button)findViewById(R.id.btnQrReader);
-        btnOptionsDb = (Button)findViewById(R.id.btnOptionsDb);
-
-        btnQrReader.setOnClickListener(new View.OnClickListener() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
+            public void run() {
+                // Iniciar la actividad principal aquí (por ejemplo, la actividad que contiene QrReader)
                 Intent intent = new Intent(MainActivity.this, QrReader.class);
                 startActivity(intent);
+                finish(); // Opcional: cierra la pantalla de inicio
             }
-        });
-        btnOptionsDb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, QrReader.class);
-                startActivity(intent);
-            }
-        });
+        }, 100);
 
     }
 
